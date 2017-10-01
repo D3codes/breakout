@@ -1,0 +1,24 @@
+{
+  "name": "breakout",
+  "version": "1.0.0",
+  "description": "",
+  "main": "breakout.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/d526f861/breakout.git"
+  },
+  "author": "David Freeman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/d526f861/breakout/issues"
+  },
+  "homepage": "https://github.com/d526f861/breakout#readme",
+  "devDependencies": {
+    "react-scripts": "^1.0.14"
+  }
+}
