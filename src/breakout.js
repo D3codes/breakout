@@ -4,7 +4,7 @@ import Wall from './wall'
 
 export default class Breakout {
   constructor() {
-    this.level = 10
+    this.level = 1
     this.score = 0
     this.lives = 3
 
@@ -28,7 +28,7 @@ export default class Breakout {
     this.render = this.render.bind(this)
     this.loop = this.loop.bind(this)
     //Start the game loop
-    this.interval = setInterval(this.loop, 10)
+    this.interval = setInterval(this.loop, 7)
   }
 
   update() {

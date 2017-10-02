@@ -22,8 +22,8 @@ export default class Ball {
       this.x > this.paddle.x &&
       this.x < this.paddle.x + this.paddle.width
     ) {
-      if(this.paddle.direction) this.dy = -4
-      else this.dy = -2
+      if(this.paddle.direction) this.dy = -2
+      else this.dy = -1
     }
 
     //Update location of ball

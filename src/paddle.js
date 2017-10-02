@@ -12,8 +12,8 @@ export default class Paddle {
 
   update() {
     if(this.direction) {
-      if(this.direction === 'right' && this.x < 700) this.x+=4
-      else if(this.direction === 'left' && this.x > 0) this.x-=4
+      if(this.direction === 'right' && this.x < 700) this.x+=2
+      else if(this.direction === 'left' && this.x > 0) this.x-=2
     }
   }
 
