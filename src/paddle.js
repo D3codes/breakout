@@ -1,6 +1,6 @@
 export default class Paddle {
   constructor(x) {
-    this.x = x
+    this.x = this.startingX = x
     this.width = 100
     this.direction = undefined
 
@@ -12,8 +12,8 @@ export default class Paddle {
 
   update() {
     if(this.direction) {
-      if(this.direction === 'right' && this.x < 700) this.x+=2
-      else if(this.direction === 'left' && this.x > 0) this.x-=2
+      if(this.direction === 'right' && this.x < 700) this.x+=4
+      else if(this.direction === 'left' && this.x > 0) this.x-=4
     }
   }
 
@@ -35,11 +35,16 @@ export default class Paddle {
       case 'ArrowRight':
         this.direction = 'right'
         break
+      default:
     }
   }
 
   handleKeyUp(event) {
     event.preventDefault()
     this.direction = undefined
+  }
+
+  reset() {
+    this.x = this.startingX
   }
 }

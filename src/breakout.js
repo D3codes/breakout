@@ -1,24 +1,17 @@
 import Ball from './ball'
 import Paddle from './paddle'
-import Brick from './brick'
+import Wall from './wall'
 
 export default class Breakout {
   constructor() {
-    this.level = 1
+    this.level = 10
     this.score = 0
     this.lives = 3
 
     this.paddle = new Paddle(400)
-    this.ball = new Ball(400, 600, 2, 2, this.paddle)
-    this.bricks = []
-    var colors = ['red', 'blue', 'green', 'yellow', 'orange', 'purple',
-    'lightblue', 'pink', 'lightgreen', 'darkblue']
-    for(var i = 50; i <= 110; i+=30) {
-      var color = colors[Math.floor(Math.random()*colors.length)]
-      for(var j = 0; j <= 750; j+=50) {
-        this.bricks.push(new Brick(j, i, 50, color))
-      }
-    }
+    this.ball = new Ball(100, 400, 2, 2, this.paddle)
+    this.wall = new Wall(this.level, this.ball)
+
     //Create the back buffer canvas
     this.backBufferCanvas = document.createElement('canvas')
     this.backBufferCanvas.width = 800
@@ -39,11 +32,30 @@ export default class Breakout {
   }
 
   update() {
-    this.ball.update()
+    var outOfBounds = !this.ball.update()
     this.paddle.update()
-    this.bricks.forEach((brick) => {
-      brick.update()
-    })
+    var bricks = this.wall.update()
+    this.score += bricks.brokenBricks*10
+    if(bricks.bricksRemaining === 0) {
+      this.level++
+      this.newLevel()
+    }
+
+    if(outOfBounds) {
+      this.lives--
+      if(this.lives < 0) this.gameOver = true
+      else {
+        this.ball.newBall()
+      }
+    }
+
+    if(this.gameOver) {
+      this.level = 1
+      this.lives = 3
+      this.score = 0
+      this.gameOver = false
+      this.newLevel()
+    }
   }
 
   render() {
@@ -52,9 +64,13 @@ export default class Breakout {
 
     this.ball.render(this.backBufferContext)
     this.paddle.render(this.backBufferContext)
-    this.bricks.forEach((brick) => {
-      brick.render(this.backBufferContext)
-    })
+    this.wall.render(this.backBufferContext)
+
+    this.backBufferContext.fillStyle = 'white'
+    this.backBufferContext.font = '20px Verdana'
+    this.backBufferContext.fillText('Lives: ' + this.lives, 10, 25)
+    this.backBufferContext.fillText('Score: ' + this.score, 355, 25)
+    this.backBufferContext.fillText('Level: ' + this.level, 700, 25)
 
     this.screenBufferContext.drawImage(this.backBufferCanvas, 0, 0)
   }
@@ -62,5 +78,11 @@ export default class Breakout {
   loop() {
     this.update()
     this.render()
+  }
+
+  newLevel() {
+    this.ball = new Ball(100, 400, 2, 2, this.paddle)
+    this.wall = new Wall(this.level, this.ball)
+    this.paddle.reset()
   }
 }
