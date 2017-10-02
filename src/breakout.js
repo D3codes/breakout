@@ -38,6 +38,7 @@ export default class Breakout {
     this.score += bricks.brokenBricks*10
     if(bricks.bricksRemaining === 0) {
       this.level++
+      this.lives++
       this.newLevel()
     }
 
