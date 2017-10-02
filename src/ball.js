@@ -1,10 +1,9 @@
 export default class Ball {
-  constructor(x, y, dx, dy, paddle) {
+  constructor(x, y, dx, dy) {
     this.x = this.startingX = x
     this.y = this.startingY = y
     this.dx = this.startingDX = dx
     this.dy = this.startingDY = dy
-    this.paddle = paddle
   }
 
   update() {
@@ -14,17 +13,6 @@ export default class Ball {
     //Check if ball hit edge
     if(this.x >= 790 || this.x <= 10) this.dx = -this.dx
     if(this.y <= 10) this.dy = -this.dy
-
-    //Check if ball hit paddle
-    if(
-      this.y+5 >= 750 &&
-      this.y < 760 &&
-      this.x > this.paddle.x &&
-      this.x < this.paddle.x + this.paddle.width
-    ) {
-      if(this.paddle.direction) this.dy = -2
-      else this.dy = -1
-    }
 
     //Update location of ball
     this.x += this.dx

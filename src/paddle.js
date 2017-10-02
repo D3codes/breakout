@@ -1,8 +1,9 @@
 export default class Paddle {
-  constructor(x) {
+  constructor(x, ball) {
     this.x = this.startingX = x
     this.width = 100
     this.direction = undefined
+    this.ball = ball
 
     this.handleKeyDown = this.handleKeyDown.bind(this)
     this.handleKeyUp = this.handleKeyUp.bind(this)
@@ -11,6 +12,18 @@ export default class Paddle {
   }
 
   update() {
+    //Check if ball hit top of paddle
+    if(
+      this.ball.y+10 >= 750 &&
+      this.ball.y+10 <= 760 &&
+      this.ball.x > this.x &&
+      this.ball.x < this.x+this.width
+    ) {
+      if(this.direction) this.ball.dy = -2
+      else this.ball.dy = -1
+    }
+
+    //Move paddle
     if(this.direction) {
       if(this.direction === 'right' && this.x < 700) this.x+=2
       else if(this.direction === 'left' && this.x > 0) this.x-=2

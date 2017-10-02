@@ -8,8 +8,8 @@ export default class Breakout {
     this.score = 0
     this.lives = 3
 
-    this.paddle = new Paddle(400)
-    this.ball = new Ball(100, 400, 2, 2, this.paddle)
+    this.ball = new Ball(100, 400, 1, 1)
+    this.paddle = new Paddle(400, this.ball)
     this.wall = new Wall(this.level, this.ball)
 
     //Create the back buffer canvas
@@ -28,7 +28,7 @@ export default class Breakout {
     this.render = this.render.bind(this)
     this.loop = this.loop.bind(this)
     //Start the game loop
-    this.interval = setInterval(this.loop, 7)
+    this.interval = setInterval(this.loop, 1)
   }
 
   update() {
@@ -82,8 +82,8 @@ export default class Breakout {
   }
 
   newLevel() {
-    this.ball = new Ball(100, 400, 2, 2, this.paddle)
+    this.ball = new Ball(100, 400, 2, 2)
     this.wall = new Wall(this.level, this.ball)
-    this.paddle.reset()
+    this.paddle = new Paddle(400, this.ball)
   }
 }
