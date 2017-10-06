@@ -9,6 +9,8 @@ export default class Paddle {
     this.handleKeyUp = this.handleKeyUp.bind(this)
     window.addEventListener('keydown', this.handleKeyDown)
     window.addEventListener('keyup', this.handleKeyUp)
+
+    this.hit = new Audio('paddle.wav')
   }
 
   update() {
@@ -19,6 +21,7 @@ export default class Paddle {
       this.ball.x > this.x &&
       this.ball.x < this.x+this.width
     ) {
+      this.hit.play()
       if(this.direction) this.ball.dy = -2
       else this.ball.dy = -1
     }

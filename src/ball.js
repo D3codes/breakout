@@ -4,15 +4,27 @@ export default class Ball {
     this.y = this.startingY = y
     this.dx = this.startingDX = dx
     this.dy = this.startingDY = dy
+
+    this.hit = new Audio('wall.wav')
+    this.out = new Audio('out.wav')
   }
 
   update() {
     //Check if ball went out of bounds
-    if(this.y >= 790) return false
+    if(this.y >= 790) {
+      this.out.play()
+      return false
+    }
 
     //Check if ball hit edge
-    if(this.x >= 790 || this.x <= 10) this.dx = -this.dx
-    if(this.y <= 10) this.dy = -this.dy
+    if(this.x >= 790 || this.x <= 10) {
+      this.hit.play()
+      this.dx = -this.dx
+    }
+    if(this.y <= 10) {
+      this.hit.play()
+      this.dy = -this.dy
+    }
 
     //Update location of ball
     this.x += this.dx

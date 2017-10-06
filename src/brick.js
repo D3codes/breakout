@@ -5,6 +5,8 @@ export default class Brick {
     this.width = width
     this.color = color
     this.ball = ball
+
+    this.break = new Audio('break.wav')
   }
 
   update() {
@@ -16,6 +18,7 @@ export default class Brick {
       (this.ball.y < this.y && this.ball.y+this.ball.dy >= this.y))
     ) {
       this.ball.dy = -this.ball.dy
+      this.break.play()
       return true
     }
 
@@ -27,6 +30,7 @@ export default class Brick {
       (this.ball.x > this.x+this.width && this.ball.x+this.ball.dx <= this.x+this.width))
     ) {
       this.ball.dx = -this.ball.dx
+      this.break.play()
       return true
     }
 
@@ -45,6 +49,7 @@ export default class Brick {
       )
     ) {
       this.ball.dy = -this.ball.dy
+      this.break.play()
       return true
     }
 
